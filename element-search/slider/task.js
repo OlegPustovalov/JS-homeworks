@@ -1,31 +1,27 @@
-let s = document.getElementsByClassName("slider__item")
-let t = document.getElementsByClassName("slider__arrow_next")
-let r = document.getElementsByClassName("slider__arrow_prev")
-let index = 0
-
-fa = function() {
-    if (index == 4) {
-        index = 0
-        s[4].classList.toggle("slider__item_active")
-        s[0].classList.toggle("slider__item_active")
-    } else {
-        s[index].classList.toggle("slider__item_active")
-        s[index+1].classList.toggle("slider__item_active")
-        index+=1 
-    }     
+fNext = function() {
+        indexActive=arraySliders.findIndex(arraySliders => arraySliders.classList.contains('slider__item_active') == true)
+        arraySliders[indexActive].classList.toggle("slider__item_active")
+        if (indexActive+1 == arraySliders.length){
+            arraySliders[0].classList.toggle("slider__item_active")
+        } else {
+            arraySliders[indexActive+1].classList.toggle("slider__item_active")
+        }
 }
 
-fb = function() {
-    if (index == 0) {
-        index = 4
-        s[0].classList.toggle("slider__item_active")
-        s[4].classList.toggle("slider__item_active")
-    } else {
-        s[index].classList.toggle("slider__item_active")
-        s[index-1].classList.toggle("slider__item_active")
-        index=index-1
-    }   
+fPrev = function() {
+        indexActive=arraySliders.findIndex(arraySliders => arraySliders.classList.contains('slider__item_active') == true)
+        arraySliders[indexActive].classList.toggle("slider__item_active")
+        if (indexActive-1 <0){
+            arraySliders[arraySliders.length-1].classList.toggle("slider__item_active")
+        } else {
+            arraySliders[indexActive-1].classList.toggle("slider__item_active")
+        }
 }
 
-r[0].onclick = fb
-t[0].onclick = fa
+let sliders = document.getElementsByClassName("slider__item")
+arraySliders = Array.from(sliders)
+
+let arrayNext = document.getElementsByClassName("slider__arrow_next")
+let arrayPrev = document.getElementsByClassName("slider__arrow_prev")
+arrayNext[0].onclick = fNext
+arrayPrev[0].onclick = fPrev
