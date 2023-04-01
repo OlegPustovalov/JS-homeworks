@@ -1,27 +1,22 @@
 //Всплывающие окна
+fOpenModalSuccess = function(){
+    let modalSuccess = document.getElementById("modal_success")
+    modalSuccess.classList.toggle("modal_active")
+}
+fCloseWindow = function(e){
+    let delClass = e.target.closest(".modal_active")
+    delClass.classList.toggle("modal_active")
+}
+//показываем окно #modal_main
+let startWindow = document.getElementById("modal_main")
+startWindow.classList.toggle("modal_active") //добавляем класс modal_active в modal_main
 
-let p = document.getElementById("modal_main")
-let s = document.getElementById("modal_success")
-let t = document.getElementsByClassName("show-success")
-let r = document.getElementsByClassName("modal__close")
-
-fa = function(){
-    p.classList.toggle("modal_active")//удаляем класс modal_active
-    s.classList.toggle("modal_active")//добавляем класс modal_active
+//ставим обработчик на крестики
+let arrayX = document.getElementsByClassName("modal__close")
+for (let i=0;i<arrayX.length;i++){
+    arrayX[i].onclick = fCloseWindow
 }
 
-fb = function(){
-    p.classList.toggle("modal_active")//удаляем класс modal_active из modal_main
-}
-
-fc = function(){
-    s.classList.toggle("modal_active")//удаляем класс modal_active из modal_success
-}
-
-
-p.classList.toggle("modal_active") //добавляем класс modal_active в modal_main
-
-t[0].onclick = fa
-r[0].onclick = fb
-r[2].onclick = fc           
-    
+//ставим обработчик на открытие окна #modal_success
+let arrayShowSuccess = document.getElementsByClassName("show-success")
+arrayShowSuccess[0].addEventListener('click',fOpenModalSuccess) 
