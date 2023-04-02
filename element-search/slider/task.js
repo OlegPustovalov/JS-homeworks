@@ -1,4 +1,4 @@
-fNext = function() {
+const fNext = function() {
         let indexActive=arraySliders.findIndex(arraySliders => arraySliders.classList.contains('slider__item_active') == true)
         arraySliders[indexActive].classList.toggle("slider__item_active")
         if (indexActive+1 == arraySliders.length){
@@ -8,7 +8,7 @@ fNext = function() {
         }
 }
 
-fPrev = function() {
+const fPrev = function() {
         let indexActive=arraySliders.findIndex(arraySliders => arraySliders.classList.contains('slider__item_active') == true)
         arraySliders[indexActive].classList.toggle("slider__item_active")
         if (indexActive-1 <0){
