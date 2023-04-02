@@ -1,9 +1,9 @@
 //Всплывающие окна
-fOpenModalSuccess = function(){
+const fOpenModalSuccess = function(){
     let modalSuccess = document.getElementById("modal_success")
     modalSuccess.classList.toggle("modal_active")
 }
-fCloseWindow = function(e){
+const fCloseWindow = function(e){
     let delClass = e.target.closest(".modal_active")
     delClass.classList.toggle("modal_active")
 }
