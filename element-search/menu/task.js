@@ -1,13 +1,9 @@
 const fClickMenu = function() {
     let element= this.nextElementSibling //поиск соседнего элемента выбранного
-    if (element == null){
-        return
-    }else{
+    if (element != null){
         if (element.classList.contains('menu_sub') == true){
             element.classList.toggle("menu_active")
             return false  //запрещение перехода по ссылке в ф-ии обработчике 
-        }else{
-            return
         }
     }
 }
