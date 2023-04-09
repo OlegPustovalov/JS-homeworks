@@ -1,94 +1,28 @@
-class Game {
-  constructor(container) {
-    this.container = container;
-    this.wordElement = container.querySelector('.word');
-    this.winsElement = container.querySelector('.status__wins');
-    this.lossElement = container.querySelector('.status__loss');
-
-    this.reset();
-
-    this.registerEvents();
-  }
-
-  reset() {
-    this.setNewWord();
-    this.winsElement.textContent = 0;
-    this.lossElement.textContent = 0;
-  }
-
-  registerEvents() {
-    /*
-      TODO:
-      Написать обработчик события, который откликается
-      на каждый введённый символ.
-      В случае правильного ввода слова вызываем this.success()
-      При неправильном вводе символа - this.fail();
-      DOM-элемент текущего символа находится в свойстве this.currentSymbol.
-     */
-  }
-
-  success() {
-    if(this.currentSymbol.classList.contains("symbol_current")) this.currentSymbol.classList.remove("symbol_current");
-    this.currentSymbol.classList.add('symbol_correct');
-    this.currentSymbol = this.currentSymbol.nextElementSibling;
-
-    if (this.currentSymbol !== null) {
-      this.currentSymbol.classList.add('symbol_current');
-      return;
+let fClickMenu=function(e){
+    //делаем неактивным предыдущий выделенный таб и убираем его контент
+    let tabElement = document.querySelector(".tab_active")
+    if (tabElement != null){
+        tabElement.classList.toggle("tab_active")  
     }
-
-    if (++this.winsElement.textContent === 10) {
-      alert('Победа!');
-      this.reset();
+    let contElement = document.querySelector(".tab__content_active")
+    if (contElement != null){
+        contElement.classList.toggle("tab__content_active")
     }
-    this.setNewWord();
-  }
+    //выделяем выбранный таб
+    this.classList.toggle("tab_active")
 
-  fail() {
-    if (++this.lossElement.textContent === 5) {
-      alert('Вы проиграли!');
-      this.reset();
-    }
-    this.setNewWord();
-  }
+    //находим индекс выбранного таба
+    let tabs = document.querySelectorAll (".tab")
+    let arrayElements = Array.from(tabs)
+    let indexActive=arrayElements.findIndex(arrayElements => arrayElements.classList.contains('tab_active') == true)
 
-  setNewWord() {
-    const word = this.getWord();
-
-    this.renderWord(word);
-  }
-
-  getWord() {
-    const words = [
-        'bob',
-        'awesome',
-        'netology',
-        'hello',
-        'kitty',
-        'rock',
-        'youtube',
-        'popcorn',
-        'cinema',
-        'love',
-        'javascript'
-      ],
-      index = Math.floor(Math.random() * words.length);
-
-    return words[index];
-  }
-
-  renderWord(word) {
-    const html = [...word]
-      .map(
-        (s, i) =>
-          `<span class="symbol ${i === 0 ? 'symbol_current': ''}">${s}</span>`
-      )
-      .join('');
-    this.wordElement.innerHTML = html;
-
-    this.currentSymbol = this.wordElement.querySelector('.symbol_current');
-  }
+    //делаем видимым контент выбранного таба
+    let contents = document.querySelectorAll (".tab__content")
+    contents[indexActive].classList.toggle("tab__content_active")
 }
 
-new Game(document.getElementById('game'))
-
+let listOfTabs = document.querySelectorAll (".tab")
+//назначаем обработчик на каждый таб
+for (let i=0; i < listOfTabs.length;i++){  
+    listOfTabs[i].onclick=fClickMenu
+}
