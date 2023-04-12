@@ -29,20 +29,17 @@ class Game {
        
         let fKeySymbol = function(event) {
             let symB = event.key
-            console.log(symB)
-            console.log(symA)
+            symA = thisGlobal.currentSymbol.textContent 
             if (symA==symB){
-                console.log('символы совпали')  
-                 //Uncaught TypeError TypeError: this.success is not a function at fKeySymbol
-                //this.success()
+                thisGlobal.success()
             }else{
-                console.log('символы НЕ совпали')
-                //this.fail()
+                thisGlobal.fail()
             }
-        }  
-        let symA = this.currentSymbol.textContent 
+        }
+          
+        var symA = this.currentSymbol.textContent 
+        var thisGlobal = this
         document.addEventListener('keydown',fKeySymbol) 
-         
       }
   
     success() {
