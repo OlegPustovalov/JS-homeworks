@@ -10,27 +10,27 @@ let fOpenChat = function() {
 
 //По нажатию Enter, реализуйте отправку в чат непустого текстового сообщения и ответ робота
 let fClient = function(event) {
-    if( event.key === 'Enter' ){
-        let input = document.querySelector('input');
-        messegeClient = input.value
+      let input = document.querySelector('input');
+      messegeClient = input.value
+      if( event.key === 'Enter' && input.value!='' && input.value!=' '){      
         messages = document.querySelector ('.chat-widget__messages')
         messages.innerHTML += 
         `<div class="message message_client">
-             <div class="message__time">09:21</div>
-             <div class="message__text">
-               ${messegeClient}
-             </div>
-         </div>`
-         let messegeRobot = messegeRobots[getRandomInt(3)]
-         messages.innerHTML += 
-         `<div class="message">
+            <div class="message__time">09:21</div>
+            <div class="message__text">
+              ${messegeClient}
+            </div>
+          </div>`
+          let messegeRobot = messegeRobots[getRandomInt(3)]
+          messages.innerHTML += 
+          `<div class="message">
               <div class="message__time">09:21</div>
               <div class="message__text">
                 ${messegeRobot}
               </div>
-          </div>`
-
-        input.value=''        
+            </div>`
+        
+          input.value=''          
     } 
     
 }
