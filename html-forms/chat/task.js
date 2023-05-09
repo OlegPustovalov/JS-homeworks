@@ -11,8 +11,8 @@ let fOpenChat = function() {
 //По нажатию Enter, реализуйте отправку в чат непустого текстового сообщения и ответ робота
 let fClient = function(event) {
       let input = document.querySelector('input');
-      messegeClient = input.value
-      if( event.key === 'Enter' && input.value!='' && input.value!=' '){      
+      messegeClient = input.value.trim() //удаляет пробелы в начале и конце строки
+      if( event.key === 'Enter' && input.value!='' && messegeClient!=''){      
         messages = document.querySelector ('.chat-widget__messages')
         messages.innerHTML += 
         `<div class="message message_client">
