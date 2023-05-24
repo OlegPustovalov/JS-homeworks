@@ -43,7 +43,6 @@
 				xhr.addEventListener('readystatechange',()=>{
 					const obj = JSON.parse(xhr.responseText) //ответ с сервера в формате JSON
 					localStorage.setItem('user_id',obj.user_id) //!записываем user_id в localStorage
-					console.log('!!!!',obj.user_id)
 			
 					fWelcome(obj.user_id)
 				})
