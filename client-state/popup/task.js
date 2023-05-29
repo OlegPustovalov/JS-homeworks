@@ -5,15 +5,11 @@ const fCloseWindow = function(e){
 }
 
 let pairs = document.cookie.split(';')
-if (pairs.includes("modal=close")){
-    console.log("окно закрыто")
-}else{
+if (pairs.includes("modal=close")==false){
     //показываем окно #modal_main
     let startWindow = document.getElementById("subscribe-modal")
     startWindow.classList.toggle("modal_active") //добавляем класс modal_active в modal_main
 }
-//ставим обработчик на крестики
+//ставим обработчик на крестик
 let arrayX = document.getElementsByClassName("modal__close")
-for (let i=0;i<arrayX.length;i++){
-    arrayX[i].onclick = fCloseWindow
-}
+arrayX[0].onclick = fCloseWindow
