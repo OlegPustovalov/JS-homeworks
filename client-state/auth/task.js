@@ -9,43 +9,37 @@
 			return
 		}		
 		//localStorage.removeItem('user_id')   //Для отладки	
-		let triger=0                  // проверка наличия user_id в localStorage и выставление триггера
-		for(let key in localStorage) {
-			if (key == 'user_id') {
-				triger=1
-			}
-		}
-		if (triger==1){
-			//localStorage уже содержит ключ user_id
+
+		if (localStorage.getItem('user_id')!=null){             //localStorage уже содержит ключ user_id
 			const formActive = document.getElementById('signin')//закрытие окна формы
 			formActive.classList.remove('signin_active')
 
 			let userId=localStorage.getItem('user_id')	
 			fWelcome(userId)
-		}else{	
-			//новый пользователь
-			const form = document.getElementById('signin__form')
-			form.addEventListener('submit', (e) =>{  //обработка события нажатия кнопки
-				e.preventDefault()					 //отмена отправки формы по умолчанию
-			
-				const formActive = document.getElementById('signin')//закрытие окна формы
-				formActive.classList.remove('signin_active')
-			
-				const xhr = new XMLHttpRequest
-				xhr.open( 'POST', 'https://students.netoservices.ru/nestjs-backend/auth' )	
-				xhr.setRequestHeader( 'Content-type', 'application/x-www-form-urlencoded' );
+		}	
 
-				//Ввод данных из формы  НЕ ПОЛУЧИЛСЯ!
-				var inputs=form.elements
-				console.log('login',inputs)
-				xhr.send( 'login=demo&password=demo' )//!необходимо создать строку из данных формы
-
-				xhr.addEventListener('readystatechange',()=>{
-					const obj = JSON.parse(xhr.responseText) //ответ с сервера в формате JSON
-					localStorage.setItem('user_id',obj.user_id) //!записываем user_id в localStorage
+        //в task.html  <form action="https://netology-slow-rest.herokuapp.com/auth.php" id="signin__form" name="register">
+		document.forms.register.addEventListener('submit', (e) =>{  //обработка события нажатия кнопки
+			e.preventDefault()					 //отмена отправки формы по умолчанию
 			
-					fWelcome(obj.user_id)
-				})
+			const formActive = document.getElementById('signin')//закрытие окна формы
+			formActive.classList.remove('signin_active')
+			
+			const xhr = new XMLHttpRequest
+			xhr.open( 'POST', 'https://students.netoservices.ru/nestjs-backend/auth' )	
+			xhr.setRequestHeader( 'Content-type', 'application/x-www-form-urlencoded' );
+
+			xhr.responseType='json'    //для ответа с сервера (response) в формате JSON
+
+			const  formData = new FormData(document.forms.register)
+			xhr.send(formData) 
+
+            //xhr.send( 'login=demo&password=demo' )   //необходимо создать строку из данных формы
+			xhr.addEventListener('load',()=>{	
+				localStorage.setItem('user_id',xhr.response.user_id)   //записываем user_id в localStorage
+				console.log('!!!!',xhr.response.user_id)
+				fWelcome(xhr.response.user_id)
 			})
-		}
+		})
+		
         
