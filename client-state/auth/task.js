@@ -8,8 +8,8 @@
 			formActive.classList.add('welcome_active')
 			return
 		}		
-		//localStorage.removeItem('user_id')   //Для отладки	
-
+		localStorage.removeItem('user_id')   //Для отладки	приводит к заполнению формы так как нет записи в localStorage
+		//правильный логин и пароль demo demo
 		if (localStorage.getItem('user_id')!=null){             //localStorage уже содержит ключ user_id
 			const formActive = document.getElementById('signin')//закрытие окна формы
 			formActive.classList.remove('signin_active')
@@ -18,7 +18,6 @@
 			fWelcome(userId)
 		}	
 
-        //в task.html  <form action="https://netology-slow-rest.herokuapp.com/auth.php" id="signin__form" name="register">
 		document.forms.register.addEventListener('submit', (e) =>{  //обработка события нажатия кнопки
 			e.preventDefault()					 //отмена отправки формы по умолчанию
 			
@@ -27,7 +26,6 @@
 			
 			const xhr = new XMLHttpRequest
 			xhr.open( 'POST', 'https://students.netoservices.ru/nestjs-backend/auth' )	
-			xhr.setRequestHeader( 'Content-type', 'application/x-www-form-urlencoded' );
 
 			xhr.responseType='json'    //для ответа с сервера (response) в формате JSON
 
